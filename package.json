@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node-dev --respawn --transpile-only ./src/server.ts"
+    "dev": "ts-node ./src/test.ts",
+    "build": "tsc && cpx './src/**/*.ejs' dist/ --clean",
+    "postinstall": "npm run build",
+    "start": "node dist/server.js"
   },
   "prettier": {
     "printWidth": 120
