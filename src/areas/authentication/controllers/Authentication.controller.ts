@@ -1,6 +1,8 @@
 import express from "express";
 import IController from "../../../interfaces/controller.interface";
 import { IAuthenticationService } from "../services";
+import * as PassportConfig2 from "../config/PassportConfig2";
+import passport from "passport";
 
 class AuthenticationController implements IController {
   public path = "/auth";
@@ -14,7 +16,11 @@ class AuthenticationController implements IController {
     this.router.get(`${this.path}/register`, this.showRegistrationPage);
     this.router.post(`${this.path}/register`, this.registration);
     this.router.get(`${this.path}/login`, this.showLoginPage);
-    this.router.post(`${this.path}/login`, this.login);
+    this.router.post(
+      `${this.path}/login`,
+      passport.authenticate("local", { failureRedirect: `${this.path}/login` }),
+      this.login
+    );
     this.router.get(`${this.path}/logout`, this.logout);
   }
 
