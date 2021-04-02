@@ -17,4 +17,9 @@ export class AuthenticationService implements IAuthenticationService {
     // 🚀 Talk to your real database here
     throw new Error("Method not implemented.");
   }
+
+  async createUser(user: IUser): Promise<IUser> {
+    // 🚀 Talk to your real database here
+    throw new Error("Method not implemented.");
+  }
 }

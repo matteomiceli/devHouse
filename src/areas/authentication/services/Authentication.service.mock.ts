@@ -35,9 +35,10 @@ export class MockAuthenticationService implements IAuthenticationService {
 
   public async findOrCreateUser(profile: IUser): Promise<IUser> {
     return new Promise((res, err) => {
-      let user = userModel.findById(profile.email);
+      let user = userModel.findByEmail(profile.email);
       if (user) {
         res(user);
+        console.log("user exists");
       } else {
         database.users.push({
           id: profile.id,
@@ -49,31 +50,33 @@ export class MockAuthenticationService implements IAuthenticationService {
         });
         user = userModel.findById(profile.id);
         res(user);
+        console.log(database.users);
       }
     });
-    throw new Error("Method not implemented");
+  }
+
+  public async createUser(profile: IUser): Promise<IUser> {
+    return new Promise((res, err) => {
+      let user = userModel.findByEmail(profile.email);
+      if (user) {
+        err(new Error("user already exists"));
+      } else {
+        database.users.push({
+          id: profile.id,
+          email: profile.email,
+          password: profile.password,
+          firstName: profile.firstName,
+          lastName: profile.lastName,
+          username: profile.username,
+        });
+        user = userModel.findById(profile.id);
+        res(user);
+        console.log(database.users);
+      }
+    });
   }
 
   private isUserValid(profile: IUser, password): boolean {
     return profile.password === password;
   }
-  // const userModel= {
-  //   findOne: (email:string) => {
-  //     const user = database.users.find((user) => user.email === email);
-  //     // console.log("the email is ---------------------- " + email);
-  //     if (user) {
-  //       return user;
-  //     }
-  //     throw new Error(`Couldn't find user with email: ${email}`);
-  //   },
-  //   findById: (id) => {
-  //     const user = database.users.find((user) => user.id === id);
-  //     if (user) {
-  //       return user;
-  //     }
-  //     console.log(`Couldn't find user with id: ${id}`);
-  //     return null;
-  //     // throw new Error(`Couldn't find user with id: ${id}`);
-  //   },
-  // }
 }

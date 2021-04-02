@@ -7,9 +7,10 @@ export const userModel = {
     if (user) {
       return user;
     }
-    throw new Error(`Couldn't find user with email: ${email}`);
+    console.log(`Couldn't find user with email: ${email}`);
+    return null;
   },
-  findById: (id) => {
+  findById: (id: string) => {
     const user = database.users.find((user) => user.id === id);
     if (user) {
       return user;
