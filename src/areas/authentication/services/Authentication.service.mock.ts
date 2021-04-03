@@ -59,7 +59,7 @@ export class MockAuthenticationService implements IAuthenticationService {
     return new Promise((res, err) => {
       let user = userModel.findByEmail(profile.email);
       if (user) {
-        err(new Error("user already exists"));
+        err(profile.email);
       } else {
         database.users.push({
           id: profile.id,
