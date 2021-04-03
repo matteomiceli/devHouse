@@ -43,17 +43,6 @@ passport.use(
   })
 );
 
-passport.authenticate("local", { failureRedirect: "/auth/login" }),
-  function (req, res) {
-    // console.log("req.user is ------------------------------------- " + req.user);
-    if (req.user.isAdmin === true) {
-      res.redirect("/admin-dashboard"); //if req.user has a property of isAdmin that is set to true, then redirects to admin dashboard
-    } else {
-      // Successful authentication, redirect home.
-      res.redirect("/dashboard");
-    }
-  };
-
 export const isAuthenticated = (req: Request, res: Response, next: NextFunction) => {
   if (req.isAuthenticated()) {
     return next();

@@ -1,5 +1,6 @@
 import IPost from "../../../interfaces/post.interface";
 import IPostService from "./IPostService";
+import { posts } from "../../../model/fakeDB";
 
 // ⭐️ Feel free to change this class in any way you like. It is simply an example...
 export class MockPostService implements IPostService {
@@ -23,5 +24,13 @@ export class MockPostService implements IPostService {
   sortPosts(posts: IPost[]): IPost[] {
     // 🚀 Implement this yourself.
     throw new Error("Method not implemented.");
+  }
+
+  deletePost(postId: number): void {
+    for (let i = 0; i < posts.length; i++) {
+      if (posts[i].postId === postId) {
+        posts.splice(i, 1);
+      }
+    }
   }
 }
