@@ -9,10 +9,10 @@ import passportLocal from "passport-local";
 import _ from "lodash";
 
 import { Request, Response, NextFunction } from "express";
-import { MockAuthenticationService } from "../services";
+import { authenticationService } from "../services";
 
 const LocalStrategy = passportLocal.Strategy;
-const userController = new MockAuthenticationService();
+const userController = new authenticationService();
 
 
 

@@ -1,10 +1,10 @@
 import { database } from "../../../model/fakeDB";
 import IUser from "../../../interfaces/user.interface";
 import { IAuthenticationService } from "./IAuthentication.service";
-import { userModel } from "../../../model/fakeUserModel";
+import { userModel } from "../../../model/userModel";
 import passport from "passport";
 
-export class MockAuthenticationService implements IAuthenticationService {
+export class authenticationService implements IAuthenticationService {
   readonly _db = database;
 
   public async getUserByEmailAndPassword(email: string, password: string): Promise<IUser> {
