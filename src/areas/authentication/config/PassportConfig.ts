@@ -4,87 +4,74 @@
 // 🚀 Configure Passport.js Local Authentication in this file
 //    Ensure code is fully typed wherever possible (unless inference can be made)
 
-import { BodyParams, Req } from "@tsed/common";
-
-import { OnInstall, OnVerify, Protocol } from "@tsed/passport";
 import passport from "passport";
-import { IStrategyOptions, Strategy } from "passport-local";
-// import AuthenticationController from "../controllers/Authentication.controller";
-import { MockAuthenticationService } from "../services/Authentication.service.mock";
-// import userController from "../controllers/userController";
-// import GitHubStrategy from "Passport-GitHub2";
+import passportLocal from "passport-local";
+import _ from "lodash";
 
-const userController = new MockAuthenticationService(); //initialize mock Auth Service as userController
+import { Request, Response, NextFunction } from "express";
+import { MockAuthenticationService } from "../services";
+
+const LocalStrategy = passportLocal.Strategy;
+const userController = new MockAuthenticationService();
+
+
 
 export default class PassportConfig {
-  localLogin = new Strategy(
-    { usernameField: "email", passwordField: "password" },
-    (email: string, password: string, done) => {
-      userController.getUserByEmailAndPassword(email, password).then((user) => {
-        return user
-          ? done(null, user)
-          : done(null, false, {
-              message: "Your login details are not valid, Please try again",
-            });
-      });
-      // return user
-      //   ? done(null, user)
-      //   : done(null, false, {
-      //       message: "Your login details are not valid, Please try again",
-      //     });
-    }
-  );
+  
 }
 
-passport.serializeUser(function (userId, done): void {
-  done(null, userId);
+passport.serializeUser<any, any>((req, user, done) => {
+  done(undefined, user);
 });
 
-passport.deserializeUser(function (email: string, done): void {
+passport.deserializeUser((email: string, done): void => {
   userController
     .findUserByEmail(email)
     .then((user) => done(null, user))
     .catch((err) => {
       done(err, null);
     });
-  // if (user) {
-  //   done(null, user);
-  // } else {
-  //   done({ message: "User not found" }, null);
-  // }
 });
+/**
+ * Sign in using Email and Password.
+ */
+passport.use(
+  new LocalStrategy({ usernameField: "email", passwordField: "password" }, (email, password, done) => {
+    userController.getUserByEmailAndPassword(email, password).then((user) => {
+      return user
+        ? done(null, user)
+        : done(null, false, {
+            message: "Your login details are not valid, Please try again",
+          });
+    });
+  })
+);
 
-// @Protocol<IStrategyOptions>({
-//   name: "login",
-//   useStrategy: Strategy,
-//   settings: {
-//     usernameField: "email",
-//     passwordField: "password"
+passport.authenticate("local", { failureRedirect: "/auth/login" }),
+  function (req, res) {
+    // console.log("req.user is ------------------------------------- " + req.user);
+    if (req.user.isAdmin === true) {
+      res.redirect("/admin-dashboard"); //if req.user has a property of isAdmin that is set to true, then redirects to admin dashboard
+    } else {
+      // Successful authentication, redirect home.
+      res.redirect("/dashboard");
+    }
+  };
+
+export const isAuthenticated = (req: Request, res: Response, next: NextFunction) => {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect("/login");
+};
+
+// export const isAuthorized = (req: Request, res: Response, next: NextFunction) => {
+//   const provider = req.path.split("/").slice(-1)[0];
+
+//   const user = req.user;
+//   if (_.find(user.tokens, { kind: provider })) {
+//       next();
+//   } else {
+//       res.redirect(`/auth/${provider}`);
 //   }
-// })
-// export class LoginLocalProtocol implements OnVerify, OnInstall {
-//   constructor(private usersService: MockAuthenticationService) {
-//   }
-
-//   async $onVerify(@Req() request: Req, @BodyParams() credentials: Credentials) {
-//     const {email, password} = credentials;
-
-//     const user = await this.usersService.getUserByEmailAndPassword(email,password);
-
-//     if (!user) {
-//       return false;
-//       // OR throw new NotAuthorized("Wrong credentials")
-//     }
-
-//     // if (!user.verifyPassword(password)) {
-//     //   return false;
-//     //   // OR throw new NotAuthorized("Wrong credentials")
-//     // }
-
-//     return user;
-//   }
-
-//   $onInstall(strategy: Strategy): void {
-//     // intercept the strategy instance to adding extra configuration
-//   }
-// }
+// };
