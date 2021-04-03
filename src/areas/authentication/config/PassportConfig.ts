@@ -5,7 +5,7 @@
 //    Ensure code is fully typed wherever possible (unless inference can be made)
 
 import passport from "passport";
-import passportLocal from "passport-local";
+import passportLocal, { IStrategyOptions, Strategy } from "passport-local";
 import _ from "lodash";
 
 import { Request, Response, NextFunction } from "express";
@@ -17,7 +17,12 @@ const userController = new authenticationService();
 
 
 export default class PassportConfig {
-  
+  private _loginDetails;
+  private _user;
+
+  constructor (strategy: Strategy) {
+    this._user = passport.use(strategy);
+  }
 }
 
 passport.serializeUser<any, any>((req, user, done) => {
