@@ -23,6 +23,7 @@ export default class PassportConfig {
   constructor (strategy: Strategy) {
     this._user = passport.use(strategy);
 
+    // double check with original passport lab to make sure this is doing anything
     passport.serializeUser<any, any>((req, user, done) => {
       done(undefined, user);
     });
