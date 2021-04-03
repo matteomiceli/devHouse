@@ -58,23 +58,25 @@ export class authenticationService implements IAuthenticationService {
   private isUserValid(profile: IUser, password): boolean {
     return profile.password === password;
   }
-  // const userModel= {
-  //   findOne: (email:string) => {
-  //     const user = database.users.find((user) => user.email === email);
-  //     // console.log("the email is ---------------------- " + email);
-  //     if (user) {
-  //       return user;
-  //     }
-  //     throw new Error(`Couldn't find user with email: ${email}`);
-  //   },
-  //   findById: (id) => {
-  //     const user = database.users.find((user) => user.id === id);
-  //     if (user) {
-  //       return user;
-  //     }
-  //     console.log(`Couldn't find user with id: ${id}`);
-  //     return null;
-  //     // throw new Error(`Couldn't find user with id: ${id}`);
-  //   },
-  // }
 }
+
+
+// import { database } from "../../../model/fakeDB";
+// import IUser from "../../../interfaces/user.interface";
+// import { IAuthenticationService } from "./IAuthentication.service";
+
+// export class MockAuthenticationService implements IAuthenticationService {
+//   readonly _db = database;
+
+//   public async getUserByEmailAndPassword(email: string, password: string): Promise<IUser> {
+//     throw new Error("Method not implemented");
+//   }
+
+//   public async findUserByEmail(email: String): Promise<null | IUser> {
+//     throw new Error("Method not implemented");
+//   }
+
+//   public async createUser(user: any): Promise<IUser> {
+//     throw new Error("Method not implemented");
+//   }
+// }
