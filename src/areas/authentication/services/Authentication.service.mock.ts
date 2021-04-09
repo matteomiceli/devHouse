@@ -9,7 +9,7 @@ export class MockAuthenticationService implements IAuthenticationService {
 
   public async getUserByEmailAndPassword(email: string, password: string): Promise<IUser> {
     return new Promise((res, err) => {
-      let user = userModel.findByEmail(email);
+      let user = userModel.findByEmail(email);  
       if (user) {
         if (this.isUserValid(user, password)) {
           res(user);
