@@ -1,7 +1,8 @@
+import IUser from "../interfaces/user.interface";
 import { database } from "./fakeDB";
 
 export const userModel = {
-  findByEmail: (email: string) => {
+  findByEmail: (email: string):null | IUser => {
     const user = database.users.find((user) => user.email === email);
     // console.log("the email is ---------------------- " + email);
     if (user) {
