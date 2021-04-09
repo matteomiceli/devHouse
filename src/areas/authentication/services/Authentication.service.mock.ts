@@ -2,6 +2,9 @@ import { database } from "../../../model/fakeDB";
 import IUser from "../../../interfaces/user.interface";
 import { IAuthenticationService } from "./IAuthentication.service";
 
+import { userModel } from "../../../model/fakeUserModel";
+import passport from "passport";
+
 export class MockAuthenticationService implements IAuthenticationService {
   readonly _db = database;
 
