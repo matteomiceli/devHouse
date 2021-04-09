@@ -36,6 +36,7 @@ export class MockAuthenticationService implements IAuthenticationService {
 
     const (userExists) = await this.findUserByEmail(user.email);
     if (userExists) {
+      // Need to throw error that user already exists by checking email already exists with a user
       throw new EmailAlreadyExistsException();
     } else {
       // Create new user
