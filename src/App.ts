@@ -4,8 +4,9 @@ import Controller from "./interfaces/controller.interface";
 import dotenv from "dotenv";
 import path from "path";
 const session = require("express-session");
-const connectRedis = require("connect-redit");
+const connectRedis = require("connect-redis");
 import morgan from "passport";
+import passport from "passport";
 import PassportConfig from "./areas/authentication/config/PassportConfig";
 
 class App {
@@ -28,8 +29,30 @@ class App {
   }
 
   private initializeMiddlewares() {
-    require("./middleware/express.middlewares")(this._app);
-    require("./middleware/passport.middlewares")(this._app);
+    require("./middleware/express.middlewares")(this._app).use(express.static(path.join(__dirname, "..", "public")));
+    require("./middleware/passport.middlewares")(this._app).use(express.urlencoded({ extended: true }));
+    require("./middleware/passport.middlewares")(this._app).set("views", path.join(__dirname, "areas"));
+    require("./middleware/passport.middlewares")(this._app).use("view engine", "ejs");
+
+    this._app.use(morgan("tiny"));
+
+    this._app.use(
+      session({
+        secret: "secret",
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+          httpOnly: true,
+          secure: false,
+          maxAge: 24 * 60 * 1000,
+        }
+      })
+    )
+
+      this._app.use(passport.initialize());
+      this._appuse(passport.session());
+      PassportConfig.initializeStrategy(passport);
+
   }
 
   private initializeErrorHandling() {
