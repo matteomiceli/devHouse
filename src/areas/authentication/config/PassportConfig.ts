@@ -17,22 +17,31 @@ import { MockAuthenticationService } from "../services/Authentication.service.mo
 const userController = new MockAuthenticationService(); //initialize mock Auth Service as userController
 
 export default class PassportConfig {
-  localLogin = new Strategy(
-    { usernameField: "email", passwordField: "password" },
-    (email: string, password: string, done) => {
-      userController.getUserByEmailAndPassword(email, password).then((user) => {
-        return user
-          ? done(null, user)
-          : done(null, false, {
-              message: "Your login details are not valid, Please try again",
-            });
-      });
-      // return user
-      //   ? done(null, user)
-      //   : done(null, false, {
-      //       message: "Your login details are not valid, Please try again",
-      //     });
-    }
+localLogin: Strategy
+
+  constructor(){
+this.localLogin = new Strategy((
+        username: string,
+        password: string,
+        done: (error: any, user?: any, options?: IVerifyOptions) => void
+    ): void;)
+  }
+  
+
+    // // { usernameField: "email", passwordField: "password" },
+    // // (email: string, password: string, done) => {
+    // //   userController.getUserByEmailAndPassword(email, password).then((user) => {
+    // //     return user
+    // //       ? done(null, user)
+    // //       : done(null, false, {
+    // //           message: "Your login details are not valid, Please try again",
+    // //         });
+    // //   });
+    // return user
+    //   ? done(null, user)
+    //   : done(null, false, {
+    //       message: "Your login details are not valid, Please try again",
+    //     });
   );
 }
 

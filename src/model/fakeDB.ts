@@ -16,7 +16,7 @@ const database: IDatabase = {
           userId: "billgates",
           message: "Microsoft is a nice company",
           createdAt: new Date(),
-          likes: 3,
+          likes: { Linus: true, Obama: true, Armaan: true },
           reposts: 5,
           comments: 0,
           commentList: [
@@ -45,7 +45,7 @@ const database: IDatabase = {
           userId: "james123",
           message: "A post by james",
           createdAt: new Date(),
-          likes: 30,
+          likes: { Linus: true, Obama: true, Sinus: true, Wobama: true, Sinux: true, Wobamo: true },
           reposts: 50,
           comments: 12,
           commentList: [
@@ -62,7 +62,7 @@ const database: IDatabase = {
           userId: "james123",
           message: "Nice weather today in Vancouver",
           createdAt: new Date(),
-          likes: 30,
+          likes: { Sinus: true, Wobama: true, Linus: true, Obama: true },
           reposts: 50,
           comments: 12,
           commentList: [
@@ -108,7 +108,7 @@ const post = {
   message: "I'm seriously considering acquiring devHouse for 6 billion dollars...",
   comments: "0",
   reposts: "0",
-  likes: "0",
+  likes: { Linus: true, Obama: true },
   commentList: [],
 };
 
@@ -120,7 +120,7 @@ const posts = [
     message: "Hi there",
     comments: "4",
     reposts: "2",
-    likes: "2",
+    likes: { Linus: true, Obama: true },
     commentList: [],
   },
   {
@@ -130,7 +130,7 @@ const posts = [
     message: "this is a new post by me",
     comments: "4",
     reposts: "2",
-    likes: "2",
+    likes: { Matteo: true, Linus: true, Obama: true },
     commentList: [],
   },
 ];
