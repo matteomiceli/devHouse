@@ -16,10 +16,32 @@ import { MockAuthenticationService } from "../services/Authentication.service.mo
 // import userController from "../controllers/userController";
 // import GitHubStrategy from "Passport-GitHub2";
 
+
+const userController = new MockAuthenticationService(); //initialize mock Auth Service as userController
+
 export default class PassportConfig {
-    private static authService = new MockAuthenticationService
+
+    localLogin = new Strategy(
+        { usernameField: "email", passwordField: "password" },
+        (email: string, password: string, done) => {
+          userController.getUserByEmailAndPassword(email, password).then((user) => {
+            return user
+              ? done(null, user)
+              : done(null, false, {
+                  message: "Your login details are not valid, Please try again",
+                });
+          });
+          // return user
+          //   ? done(null, user)
+          //   : done(null, false, {
+          //       message: "Your login details are not valid, Please try again",
+          //     });
+        }
+      );
+
+    private static authService = new MockAuthenticationService();
     private static _localStrategy: LocalStrategy;
-    private statis _strategyOption: IStrategyOptions = {
+    private static _strategyOption: IStrategyOptions = {
         usernameField: "email",
         passwordField: "password",
     };
@@ -32,10 +54,11 @@ export default class PassportConfig {
 
     }
 
-    private static serializeUse(user: IUser, done: (err: any, id?: any) => void) {
+    private static serializeUser(user: IUser, done: (err: any, id?: any) => void) {
         done(null, user.id);
 
     }
+    
 
     private static async deserializeUser(id: string, done: (err: any, id?: any) => void) {
         done(null, user.id);
@@ -62,4 +85,3 @@ export default class PassportConfig {
     }
 }
 
-export default class PassportConfig {}

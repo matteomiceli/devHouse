@@ -2,6 +2,11 @@ import express from "express";
 import errorMiddleware from "./middleware/error.middleware";
 import Controller from "./interfaces/controller.interface";
 import dotenv from "dotenv";
+import path from "path";
+const session = require("express-session");
+const connectRedis = require("connect-redit");
+import morgan from "passport";
+import PassportConfig from "./areas/authentication/config/PassportConfig";
 
 class App {
   private _app: express.Application;
