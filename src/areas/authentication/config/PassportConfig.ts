@@ -7,7 +7,8 @@
 import { BodyParams, Req } from "@tsed/common";
 import { OnInstall, OnVerify, Protocol } from "@tsed/passport";
 import passport, { PassportStatic } from "passport";
-import { IStrategyOptions, Strategy } from "passport-local";
+import { IStrategyOptions, IVerifyOptions, Strategy } from "passport-local";
+import { stringify } from "querystring";
 
 // import AuthenticationController from "../controllers/Authentication.controller";
 import { MockAuthenticationService } from "../services/Authentication.service.mock";
@@ -31,7 +32,7 @@ export default class PassportConfig {
 
     }
 
-    private static serializeUse(user:IUser, done: (err: any, id?: any) => void) {
+    private static serializeUse(user: IUser, done: (err: any, id?: any) => void) {
         done(null, user.id);
 
     }
@@ -50,6 +51,14 @@ export default class PassportConfig {
         } else {
             return done({ message: "This user is not found."}, null)
         }
+    }
+
+    private static async signIn(
+        email: string,
+        password: string,
+        done: (ertror: any, user?: IUser | boolean, options?: IVerifyOptions) => void 
+    ) {
+        
     }
 }
 
