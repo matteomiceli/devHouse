@@ -10,6 +10,7 @@ export class MockPostService implements IPostService {
   }
   getAllPosts(username: string): IPost[] {
     // 🚀 Implement this yourself.
+
     throw new Error("Method not implemented.");
   }
   findById(id: string): IPost {
