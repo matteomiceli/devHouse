@@ -4,15 +4,20 @@ import IPostService from "../services/IPostService";
 import { post, posts } from "../../../model/fakeDB";
 
 class PostController implements IController {
+  postService: IPostService;
+
   public path = "/posts";
   public router = Router();
 
   constructor(postService: IPostService) {
+    this.postService = postService;
     this.initializeRoutes();
   }
 
   private initializeRoutes() {
     this.router.get(this.path, this.getAllPosts);
+    // this.router.get(`${this.path}/:id/like`, this.likePost);
+
     this.router.get(`${this.path}/:id`, this.getPostById);
     this.router.get(`${this.path}/:id/delete`, this.deletePost);
     this.router.post(`${this.path}/:id/comment`, this.createComment);
@@ -32,7 +37,13 @@ class PostController implements IController {
   // 🚀 These post methods needs to be implemented by you
   private createComment = async (req: Request, res: Response, next: NextFunction) => {};
   private createPost = async (req: Request, res: Response, next: NextFunction) => {};
-  private deletePost = async (req: Request, res: Response, next: NextFunction) => {};
+  private deletePost = async (req: Request, res: Response, next: NextFunction) => {
+    const postID = req.params.id;
+    console.log("this has been called ---------------------- deletePost");
+    this.postService.deletePost(parseInt(postID));
+    // this.deletePost(postID);
+    res.redirect(`${this.path}`);
+  };
 }
 
 export default PostController;
