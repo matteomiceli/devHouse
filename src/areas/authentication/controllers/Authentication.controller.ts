@@ -39,10 +39,7 @@ class AuthenticationController implements IController {
   // 🔑 These Authentication methods needs to be implemented by you
   private login = (req: express.Request, res: express.Response) => {
     // res.redirect(`/posts/${req.user.id}`); should probably be finalized as this path
-    passport.authenticate('local', {
-      successRedirect: '/posts',
-      failureRedirect: '/login'
-    })
+    
     res.redirect(`/posts/`); // just for now
   };
 

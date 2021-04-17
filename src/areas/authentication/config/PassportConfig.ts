@@ -27,6 +27,7 @@ export default class PassportConfig {
     passport.serializeUser(this.serializeUser);
     passport.deserializeUser(this.deserializeUser);
     this._localStrategy = new Strategy(this._strategyOptions, this._loginCredentials);
+    passport.use('local', this._localStrategy);
   }
 
   private serializeUser(user, done: (err: any, email?: any) => void) {
@@ -41,17 +42,15 @@ export default class PassportConfig {
     return done({ message: 'user not found!' });
   }
 
-  private _loginCredentials(
+  private async _loginCredentials(
     email: string,
     password: string,
-    done: (error: any, user?: any, options?: IVerifyOptions) => void) {
-    this._authService.getUserByEmailAndPassword(email, password).then((user) => {
-      return user
-        ? done(null, user)
-        : done(null, false, {
-          message: "Your login details are not valid, Please try again",
-        });
-    });
+    done: (error: any, user?: IUser, options?: IVerifyOptions) => void) {
+    let user = await this._authService.getUserByEmailAndPassword(email, password);
+    if (user) {
+      return done(null, user);
+    } 
+    return done({message: 'login details invalid... please try again'});
   }
 
 }
