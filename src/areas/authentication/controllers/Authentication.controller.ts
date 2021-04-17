@@ -1,7 +1,7 @@
 import express from "express";
 import IController from "../../../interfaces/controller.interface";
 import { IAuthenticationService, MockAuthenticationService } from "../services";
-import * as PassportConfig2 from "../config/PassportConfig2";
+import PassportConfig  from "../config/PassportConfig";
 import passport from "passport";
 import EmailAlreadyExistsException from "../../../exceptions/EmailAlreadyExists";
 
@@ -39,6 +39,10 @@ class AuthenticationController implements IController {
   // 🔑 These Authentication methods needs to be implemented by you
   private login = (req: express.Request, res: express.Response) => {
     // res.redirect(`/posts/${req.user.id}`); should probably be finalized as this path
+    passport.authenticate('local', {
+      successRedirect: '/posts',
+      failureRedirect: '/login'
+    })
     res.redirect(`/posts/`); // just for now
   };
 
