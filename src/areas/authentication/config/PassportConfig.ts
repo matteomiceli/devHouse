@@ -29,7 +29,7 @@ export default class PassportConfig {
     this._localStrategy = new Strategy(this._strategyOptions, this._loginCredentials);
   }
 
-  private serializeUser(user: IUser, done: (err: any, email?: any) => void) {
+  private serializeUser(user, done: (err: any, email?: any) => void) {
     done(null, user.email);
   }
 
