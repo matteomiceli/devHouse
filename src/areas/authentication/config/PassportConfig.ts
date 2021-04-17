@@ -7,52 +7,92 @@
 import { BodyParams, Req } from "@tsed/common";
 
 import { OnInstall, OnVerify, Protocol } from "@tsed/passport";
-import passport from "passport";
-import { IStrategyOptions, Strategy } from "passport-local";
+import { runInThisContext } from "node:vm";
+import passport, { PassportStatic } from "passport";
+import { IStrategyOptions, IVerifyOptions, Strategy } from "passport-local";
+import IUser from "../../../interfaces/user.interface";
 // import AuthenticationController from "../controllers/Authentication.controller";
 import { MockAuthenticationService } from "../services/Authentication.service.mock";
 // import userController from "../controllers/userController";
 // import GitHubStrategy from "Passport-GitHub2";
 
-const userController = new MockAuthenticationService(); //initialize mock Auth Service as userController
 
 export default class PassportConfig {
-  localLogin = new Strategy(
-    { usernameField: "email", passwordField: "password" },
-    (email: string, password: string, done) => {
-      userController.getUserByEmailAndPassword(email, password).then((user) => {
-        return user
-          ? done(null, user)
-          : done(null, false, {
-              message: "Your login details are not valid, Please try again",
-            });
-      });
-      // return user
-      //   ? done(null, user)
-      //   : done(null, false, {
-      //       message: "Your login details are not valid, Please try again",
-      //     });
+  private _authService = new MockAuthenticationService();
+  private _localStrategy: Strategy;
+  private _strategyOptions: IStrategyOptions;
+
+
+  constructor(passport: PassportStatic) {
+    passport.serializeUser(this.serializeUser);
+    passport.deserializeUser(this.deserializeUser);
+    this._localStrategy = new Strategy(this._strategyOptions, this._loginCredentials);
+  }
+
+  private serializeUser(user: IUser, done: (err: any, email?: any) => void) {
+    done(null, user.email);
+  }
+
+  private async deserializeUser(email: string, done: (err: any, id?: any) => void) {
+    let user = await this._authService.findUserByEmail(email);
+    if (user) {
+      return done(null, user);
     }
-  );
+    return done({ message: 'user not found!' });
+  }
+
+  private _loginCredentials(
+    email: string,
+    password: string,
+    done: (error: any, user?: any, options?: IVerifyOptions) => void) {
+    this._authService.getUserByEmailAndPassword(email, password).then((user) => {
+      return user
+        ? done(null, user)
+        : done(null, false, {
+          message: "Your login details are not valid, Please try again",
+        });
+    });
+  }
+
 }
 
-passport.serializeUser(function (userId, done): void {
-  done(null, userId);
-});
 
-passport.deserializeUser(function (email: string, done): void {
-  userController
-    .findUserByEmail(email)
-    .then((user) => done(null, user))
-    .catch((err) => {
-      done(err, null);
-    });
+
+
+
+
+
+// localLogin = new Strategy(
+//   { usernameField: "email", passwordField: "password" },
+//   (email: string, password: string, done) => {
+//     userController.getUserByEmailAndPassword(email, password).then((user) => {
+//       return user
+//         ? done(null, user)
+//         : done(null, false, {
+//           message: "Your login details are not valid, Please try again",
+//         });
+//     });
+//   }
+// );
+
+
+// passport.serializeUser(function (userEmail, done): void {
+//   done(null, userEmail);
+// });
+
+// passport.deserializeUser(function (email: string, done): void {
+  // userController
+  //   .findUserByEmail(email)
+  //   .then((user) => done(null, user))
+  //   .catch((err) => {
+  //     done(err, null);
+  //   });
   // if (user) {
   //   done(null, user);
   // } else {
   //   done({ message: "User not found" }, null);
   // }
-});
+// });
 
 // @Protocol<IStrategyOptions>({
 //   name: "login",
