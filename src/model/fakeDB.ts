@@ -83,19 +83,17 @@ const database: IDatabase = {
 };
 
 // -------- Note: I only created these as a simple test example for you, delete them later and use above db or your own --------------
-const userDatabase = [
+const userDatabase = [ // user database to mock session data
   {
     id: "1",
-    firstName: "Armaan",
-    lastName: "Armaan",
+    userame: "Armaan", 
     email: "ad123@gmail.com",
     password: "ad123123!",
     role: "admin",
   },
   {
     id: "2",
-    firstName: "John",
-    lastName: "Armaan",
+    userame: "John",
     email: "jo123@gmail.com",
     password: "jo123",
     role: "user",

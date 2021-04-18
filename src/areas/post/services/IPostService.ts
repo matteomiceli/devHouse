@@ -11,7 +11,7 @@ export default interface IPostService {
   findById(id: string): IPost | undefined;
 
   addCommentToPost(
-    message: { id: string; createdAt: string; userId: string; message: string },
+    message: { id: string; createdAt: Date; userId: string; message: string },
     postId: string
   ): IPost | void;
 

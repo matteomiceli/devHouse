@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction, Router } from "express";
 import IController from "../../../interfaces/controller.interface";
 import IPostService from "../services/IPostService";
-import { post, posts } from "../../../model/fakeDB";
+import { post, posts, database, userDatabase } from "../../../model/fakeDB";
 import {v4 as uuid} from 'uuid';
 
 class PostController implements IController {
@@ -37,16 +37,18 @@ class PostController implements IController {
 
   // 🚀 These post methods needs to be implemented by you
   private createComment = async (req: Request, res: Response, next: NextFunction) => {
-    // const postID = req.params.id;
-    // const commentText = req.body.commentText;
-    // let comment = {
-    //   id: `${uuid.v4()}`,
-    //   createdAt: `${new Date()}`, 
-    //   userId: `${postID}`, 
-    //   message: commentText
-    // }
+    const commentText = req.body.commentText;
+    const postID = req.params.id;
+    const user = userDatabase[0]
 
-    // await this.postService.addCommentToPost(comment, postID);
+    let comment = {
+      id: `${uuid.v4()}`,
+      createdAt: new Date(), 
+      userId: `${}`, 
+      message: commentText
+    }
+
+    await this.postService.addCommentToPost(comment, postID);
     res.render(`post/views/post`, { post } ); // sends back to previous page
   };
 
