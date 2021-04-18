@@ -1,6 +1,7 @@
 import IPost from "../../../interfaces/post.interface";
 import IPostService from "./IPostService";
 import { posts, database } from "../../../model/fakeDB";
+import { CommentViewModel } from "../comment.viewmodel";
 
 // ⭐️ Feel free to change this class in any way you like. It is simply an example...
 export class MockPostService implements IPostService {

@@ -4,6 +4,7 @@ import IPostService from "../services/IPostService";
 import { post, posts, database, userDatabase } from "../../../model/fakeDB";
 import {v4 as uuid} from 'uuid';
 import IPost from "../../../interfaces/post.interface";
+import IComment from "../../../interfaces/comment.interface";
 
 class PostController implements IController {
   postService: IPostService;
@@ -55,7 +56,7 @@ class PostController implements IController {
     const postID = req.params.id;
     const sessionUser = userDatabase[0]; // hardcoded session example
     
-    let comment = {
+    let comment: IComment = {
       id: `${uuid()}`,
       createdAt: new Date(), 
       userId: `${sessionUser.id}`, 
