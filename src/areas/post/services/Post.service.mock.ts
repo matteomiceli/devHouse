@@ -16,24 +16,25 @@ export class MockPostService implements IPostService {
   }
 
   findById(id: string): IPost|undefined {
-    console.log(id);
+    let returnedPost: IPost; 
+    console.log('the id is ' + id);
     database.users.forEach(user => {
       user.posts.forEach(post => {
-        console.log(post)
+        // console.log(post)
         if (post.postId == id) {
           console.log(post);
-          return post;
+          returnedPost = post;
         }
       }) 
     });
-    return undefined;
+    return returnedPost;
   }
 
   addCommentToPost(message: { id: string; createdAt: Date; userId: string; message: string }, postId: string): void { 
     const post = this.findById(postId);
     console.log(post)
     // push comment to post comment list
-    // post.commentList.push(message);
+    post.commentList.push(message);
   }
 
   sortPosts(posts: IPost[]): IPost[] {
