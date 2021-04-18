@@ -115,45 +115,35 @@ const post = {
 
 const posts: IPost[] = [
   {
-    postId: '1',
+    postId: "1",
     userId: "billgates",
     createdAt: new Date(),
     message: "I'm seriously considering acquiring devHouse for 6 billion dollars...",
     comments: 0,
     reposts: 0,
-    likes: 0,
+    likes: {},
     commentList: [],
   },
   {
-    postId: '5',
+    postId: "5",
     userId: "john",
     createdAt: new Date(),
     message: "Hi there",
-<<<<<<< HEAD
-    comments: "4",
-    reposts: "2",
-    likes: { Linus: true, Obama: true },
-=======
     comments: 4,
     reposts: 2,
-    likes: 2,
->>>>>>> 6b9707b45398d04540a81364f17c13777a812bc8
+    likes: { Linus: true, Obama: true },
+
     commentList: [],
   },
   {
-    postId: '4',
+    postId: "4",
     userId: "john",
     createdAt: new Date(),
     message: "this is a new post by me",
-<<<<<<< HEAD
-    comments: "4",
-    reposts: "2",
-    likes: { Matteo: true, Linus: true, Obama: true },
-=======
     comments: 4,
     reposts: 2,
-    likes: 2,
->>>>>>> 6b9707b45398d04540a81364f17c13777a812bc8
+    likes: { Matteo: true, Linus: true, Obama: true },
+
     commentList: [],
   },
 ];
