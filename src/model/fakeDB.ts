@@ -1,4 +1,5 @@
 import IDatabase from "../interfaces/database.interface.ts";
+import IPost from "../interfaces/post.interface";
 
 // Please feel free to not use this, or completely change it to your liking. It is just an example.
 const database: IDatabase = {
@@ -12,7 +13,7 @@ const database: IDatabase = {
       username: "billgates",
       posts: [
         {
-          id: "abc1",
+          postId: "abc1",
           userId: "billgates",
           message: "Microsoft is a nice company",
           createdAt: new Date(),
@@ -41,7 +42,7 @@ const database: IDatabase = {
       lastName: "Smith",
       posts: [
         {
-          id: "abc3",
+          postId: "abc3",
           userId: "james123",
           message: "A post by james",
           createdAt: new Date(),
@@ -58,7 +59,7 @@ const database: IDatabase = {
           ],
         },
         {
-          id: "abc5",
+          postId: "abc5",
           userId: "james123",
           message: "Nice weather today in Vancouver",
           createdAt: new Date(),
@@ -112,25 +113,47 @@ const post = {
   commentList: [],
 };
 
-const posts = [
+const posts: IPost[] = [
   {
-    postId: 5,
-    userId: "john",
+    postId: '1',
+    userId: "billgates",
     createdAt: new Date(),
-    message: "Hi there",
-    comments: "4",
-    reposts: "2",
-    likes: { Linus: true, Obama: true },
+    message: "I'm seriously considering acquiring devHouse for 6 billion dollars...",
+    comments: 0,
+    reposts: 0,
+    likes: 0,
     commentList: [],
   },
   {
-    postId: 4,
+    postId: '5',
+    userId: "john",
+    createdAt: new Date(),
+    message: "Hi there",
+<<<<<<< HEAD
+    comments: "4",
+    reposts: "2",
+    likes: { Linus: true, Obama: true },
+=======
+    comments: 4,
+    reposts: 2,
+    likes: 2,
+>>>>>>> 6b9707b45398d04540a81364f17c13777a812bc8
+    commentList: [],
+  },
+  {
+    postId: '4',
     userId: "john",
     createdAt: new Date(),
     message: "this is a new post by me",
+<<<<<<< HEAD
     comments: "4",
     reposts: "2",
     likes: { Matteo: true, Linus: true, Obama: true },
+=======
+    comments: 4,
+    reposts: 2,
+    likes: 2,
+>>>>>>> 6b9707b45398d04540a81364f17c13777a812bc8
     commentList: [],
   },
 ];
