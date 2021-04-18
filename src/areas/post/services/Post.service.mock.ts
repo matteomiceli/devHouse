@@ -15,8 +15,8 @@ export class MockPostService implements IPostService {
     throw new Error("Method not implemented.");
   }
 
-  findById(id: string): IPost|undefined {
-    let returnedPost: IPost; 
+  findById(id: string): IPost | undefined {
+    let returnedPost: IPost;
     console.log('the id is ' + id);
     database.users.forEach(user => {
       user.posts.forEach(post => {
@@ -25,12 +25,12 @@ export class MockPostService implements IPostService {
           console.log(post);
           returnedPost = post;
         }
-      }) 
+      })
     });
     return returnedPost;
   }
 
-  addCommentToPost(message: { id: string; createdAt: Date; userId: string; message: string }, postId: string): void { 
+  addCommentToPost(message: { id: string; createdAt: Date; userId: string; message: string }, postId: string): void {
     const post = this.findById(postId);
     console.log(post)
     // push comment to post comment list
