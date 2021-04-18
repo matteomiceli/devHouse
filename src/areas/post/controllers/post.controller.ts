@@ -39,17 +39,19 @@ class PostController implements IController {
   private createComment = async (req: Request, res: Response, next: NextFunction) => {
     const commentText = req.body.commentText;
     const postID = req.params.id;
-    const user = userDatabase[0]
+    const sessionUser = userDatabase[0]; // hardcoded session example
 
     let comment = {
       id: `${uuid.v4()}`,
       createdAt: new Date(), 
-      userId: `${}`, 
+      userId: `${sessionUser.id}`, 
       message: commentText
     }
-
+    
+    let postObj = await this.postService.findById(postID); // returns a post object
+    
     await this.postService.addCommentToPost(comment, postID);
-    res.render(`post/views/post`, { post } ); // sends back to previous page
+    res.render(`post/views/post`, { post: postObj } ); // sends back to previous page
   };
 
   private createPost = async (req: Request, res: Response, next: NextFunction) => {};
