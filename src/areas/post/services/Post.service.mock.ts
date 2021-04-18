@@ -8,7 +8,7 @@ export class MockPostService implements IPostService {
     // 🚀 Implement this yourself.
     throw new Error("Method not implemented.");
   }
-  
+
   getAllPosts(username: string): IPost[] {
     // 🚀 Implement this yourself.
 
@@ -46,6 +46,23 @@ export class MockPostService implements IPostService {
     for (let i = 0; i < posts.length; i++) {
       if (posts[i].postId === id) {
         posts.splice(i, 1);
+      }
+    }
+  }
+
+  likePost(postId: number, username: string): void {
+    console.log("like post is being called ----------------------- post.service");
+    for (let i = 0; i < posts.length; i++) {
+      if (posts[i].postId === postId.toString()) {
+        if (posts[i].likes[username]) {
+          delete posts[i].likes[username];
+          console.log("we disliked the post");
+          console.log("Post Likes------" + JSON.stringify(posts[i].likes));
+          return;
+        }
+        posts[i].likes[username] = true;
+        console.log("we Liked the post");
+        console.log("Post Likes------" + JSON.stringify(posts[i].likes));
       }
     }
   }

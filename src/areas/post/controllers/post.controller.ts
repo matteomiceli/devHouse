@@ -18,12 +18,14 @@ class PostController implements IController {
 
   private initializeRoutes() {
     this.router.get(this.path, this.getAllPosts);
-    // this.router.get(`${this.path}/:id/like`, this.likePost);
-
     this.router.get(`${this.path}/:id`, this.getPostById);
+    this.router.get(`${this.path}/:id/like`, this.likePost);
     this.router.get(`${this.path}/:id/delete`, this.deletePost);
     this.router.post(`${this.path}/:id/comment`, this.createComment);
     this.router.post(`${this.path}`, this.createPost);
+
+    //tests on posts/post
+    this.router.get(`${this.path}/post/:id/like`, this.likePost);
   }
 
   // 🚀 This method should use your postService and pull from your actual fakeDB, not the temporary posts object
@@ -74,6 +76,23 @@ class PostController implements IController {
     this.postService.deletePost(parseInt(postID));
     // this.deletePost(postID);
     res.redirect(`${this.path}`);
+  };
+
+  private likePost = async (req: Request, res: Response, next: NextFunction) => {
+    const postID = parseInt(req.params.id);
+    console.log("Post ID is------------" + postID);
+    if (req.user) {
+      //if user is logged in, user's username will be used to add to a post's likes
+      console.log("req.user is ------------ " + req.user);
+      // this.postService.likePost(postID, req.user);
+
+      res.redirect(`${this.path}`);
+      return;
+    }
+    this.postService.likePost(postID, "Demo");
+    res.redirect(`${this.path}`);
+
+    console.log("this has been called ---------------------- likePost");
   };
 }
 
