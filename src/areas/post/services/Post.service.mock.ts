@@ -16,9 +16,10 @@ export class MockPostService implements IPostService {
   }
 
   findById(id: string): IPost|undefined {
-    console.log(id)
+    console.log(id);
     database.users.forEach(user => {
       user.posts.forEach(post => {
+        console.log(post)
         if (post.postId == id) {
           console.log(post);
           return post;
