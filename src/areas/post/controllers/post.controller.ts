@@ -2,7 +2,7 @@ import { Request, Response, NextFunction, Router } from "express";
 import IController from "../../../interfaces/controller.interface";
 import IPostService from "../services/IPostService";
 import { post, posts } from "../../../model/fakeDB";
-import {v4 as uuid} from 'uuid';
+import { v4 as uuid } from "uuid";
 
 class PostController implements IController {
   postService: IPostService;
@@ -43,13 +43,13 @@ class PostController implements IController {
     // const commentText = req.body.commentText;
     // let comment = {
     //   id: `${uuid.v4()}`,
-    //   createdAt: `${new Date()}`, 
-    //   userId: `${postID}`, 
+    //   createdAt: `${new Date()}`,
+    //   userId: `${postID}`,
     //   message: commentText
     // }
 
     // await this.postService.addCommentToPost(comment, postID);
-    res.render(`post/views/post`, { post } ); // sends back to previous page
+    res.render(`post/views/post`, { post }); // sends back to previous page
   };
 
   private createPost = async (req: Request, res: Response, next: NextFunction) => {};
@@ -62,7 +62,13 @@ class PostController implements IController {
   };
 
   private likePost = async (req: Request, res: Response, next: NextFunction) => {
-    const postID = req.params.id;
+    const postID = parseInt(req.params.id);
+    console.log("Post ID is------------" + postID);
+    if (req.user) {
+      //if user is logged in, user's username will be used to add to a post's likes
+      return;
+    }
+    this.postService.likePost(postID, "Demo");
     console.log("this has been called ---------------------- likePost");
   };
 }
