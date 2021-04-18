@@ -41,17 +41,18 @@ class PostController implements IController {
     const commentText = req.body.commentText;
     const postID = req.params.id;
     const sessionUser = userDatabase[0]; // hardcoded session example
-
+    
     let comment = {
-      id: `${uuid.v4()}`,
+      id: `${uuid()}`,
       createdAt: new Date(), 
       userId: `${sessionUser.id}`, 
       message: commentText
     }
     
-    let postObj = await this.postService.findById(postID); // returns a post object
+    let postObj = this.postService.findById(postID); // returns a post object
     
-    await this.postService.addCommentToPost(comment, postID);
+    this.postService.addCommentToPost(comment, postID);
+
     res.render(`post/views/post`, { post: postObj } ); // sends back to previous page
   };
 
