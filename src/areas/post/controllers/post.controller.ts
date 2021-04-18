@@ -66,6 +66,9 @@ class PostController implements IController {
     console.log("Post ID is------------" + postID);
     if (req.user) {
       //if user is logged in, user's username will be used to add to a post's likes
+      console.log("req.user is ------------ " + req.user);
+      // this.postService.likePost(postID, req.user);
+
       res.redirect(`${this.path}`);
       return;
     }
