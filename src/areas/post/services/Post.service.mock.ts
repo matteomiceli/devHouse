@@ -19,7 +19,6 @@ export class MockPostService implements IPostService {
     console.log(id)
     database.users.forEach(user => {
       user.posts.forEach(post => {
-        console.log(post)
         if (post.postId == id) {
           console.log(post);
           return post;
