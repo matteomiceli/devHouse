@@ -3,6 +3,7 @@ import IController from "../../../interfaces/controller.interface";
 import IPostService from "../services/IPostService";
 import { post, posts, database, userDatabase } from "../../../model/fakeDB";
 import {v4 as uuid} from 'uuid';
+import IPost from "../../../interfaces/post.interface";
 
 class PostController implements IController {
   postService: IPostService;

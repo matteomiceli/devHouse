@@ -1,6 +1,6 @@
 import IPost from "../../../interfaces/post.interface";
 import IPostService from "./IPostService";
-import { posts } from "../../../model/fakeDB";
+import { posts, database } from "../../../model/fakeDB";
 
 // ⭐️ Feel free to change this class in any way you like. It is simply an example...
 export class MockPostService implements IPostService {
@@ -15,13 +15,20 @@ export class MockPostService implements IPostService {
     throw new Error("Method not implemented.");
   }
 
-  findById(id: string): IPost {
-    // 🚀 Implement this yourself.
-    throw new Error("Method not implemented.");
+  findById(id: string): IPost|undefined {
+    database.users.forEach(user => {
+      user.posts.forEach(post => {
+        if (post.postId == id) {
+          console.log(post);
+          return post;
+        }
+      }) 
+    });
+    return undefined;
   }
 
   addCommentToPost(message: { id: string; createdAt: Date; userId: string; message: string }, postId: string): void { 
-    // 🚀 Implement this yourself.
+    
 
 
     throw new Error("Method not implemented.");

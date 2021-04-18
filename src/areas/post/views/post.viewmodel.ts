@@ -24,7 +24,7 @@ export class PostViewModel {
   public commentList?: Array<IComment>;
 
   constructor(post: IPost) {
-    this.postId = post.id;
+    this.postId = post.postId;
     this.userId = post.userId;
     this.createdAt = post.createdAt;
     this.message = post.message;

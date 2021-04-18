@@ -7,7 +7,7 @@ import IComment from "../../interfaces/comment.interface";
 // Please feel free to change this in any way you like.
 export class CommentViewModel {
   userId: string;
-  createdAt: string;
+  createdAt: Date;
   message: string;
 
   constructor(comment: IComment) {
