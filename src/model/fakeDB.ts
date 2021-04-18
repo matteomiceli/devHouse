@@ -13,7 +13,7 @@ const database: IDatabase = {
       username: "billgates",
       posts: [
         {
-          id: "abc1",
+          postId: "abc1",
           userId: "billgates",
           message: "Microsoft is a nice company",
           createdAt: new Date(),
@@ -42,7 +42,7 @@ const database: IDatabase = {
       lastName: "Smith",
       posts: [
         {
-          id: "abc3",
+          postId: "abc3",
           userId: "james123",
           message: "A post by james",
           createdAt: new Date(),
@@ -59,7 +59,7 @@ const database: IDatabase = {
           ],
         },
         {
-          id: "abc5",
+          postId: "abc5",
           userId: "james123",
           message: "Nice weather today in Vancouver",
           createdAt: new Date(),
@@ -113,35 +113,35 @@ const post = {
   commentList: [],
 };
 
-const posts: IPost = [
+const posts: IPost[] = [
   {
     postId: '1',
     userId: "billgates",
-    createdAt: "Thursday, March 2nd",
+    createdAt: new Date(),
     message: "I'm seriously considering acquiring devHouse for 6 billion dollars...",
-    comments: "0",
-    reposts: "0",
-    likes: "0",
+    comments: 0,
+    reposts: 0,
+    likes: 0,
     commentList: [],
   },
   {
     postId: '5',
     userId: "john",
-    createdAt: `${new Date()}`,
+    createdAt: new Date(),
     message: "Hi there",
-    comments: "4",
-    reposts: "2",
-    likes: "2",
+    comments: 4,
+    reposts: 2,
+    likes: 2,
     commentList: [],
   },
   {
     postId: '4',
     userId: "john",
-    createdAt: `${new Date()}`,
+    createdAt: new Date(),
     message: "this is a new post by me",
-    comments: "4",
-    reposts: "2",
-    likes: "2",
+    comments: 4,
+    reposts: 2,
+    likes: 2,
     commentList: [],
   },
 ];

@@ -42,7 +42,7 @@ class PostController implements IController {
     // let comment = {
     //   id: `${uuid.v4()}`,
     //   createdAt: `${new Date()}`, 
-    //   postId: `${postID}`, 
+    //   userId: `${postID}`, 
     //   message: commentText
     // }
 

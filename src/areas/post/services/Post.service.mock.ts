@@ -20,7 +20,7 @@ export class MockPostService implements IPostService {
     throw new Error("Method not implemented.");
   }
 
-  addCommentToPost(message: { id: string; createdAt: string; postId: string; message: string }, postId: string): void { 
+  addCommentToPost(message: { id: string; createdAt: string; userId: string; message: string }, postId: string): void { 
     // 🚀 Implement this yourself.
 
 
@@ -33,8 +33,9 @@ export class MockPostService implements IPostService {
   }
 
   deletePost(postId: number): void {
+    let id = `${postId}`;
     for (let i = 0; i < posts.length; i++) {
-      if (posts[i].postId === postId) {
+      if (posts[i].postId === id) {
         posts.splice(i, 1);
       }
     }
