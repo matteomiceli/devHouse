@@ -6,13 +6,15 @@ import IComment from "../../interfaces/comment.interface";
 
 // Please feel free to change this in any way you like.
 export class CommentViewModel {
+  id: string;
   userId: string;
-  createdAt: Date;
+  createdAt: String;
   message: string;
 
   constructor(comment: IComment) {
+    this.id = comment.id;
     this.userId = comment.userId;
-    this.createdAt = comment.createdAt;
+    this.createdAt = comment.createdAt.toString();
     this.message = comment.message;
   }
 }
