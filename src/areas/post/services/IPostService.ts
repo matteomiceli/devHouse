@@ -16,4 +16,6 @@ export default interface IPostService {
   ): IPost | void;
 
   deletePost?(postId: number): void;
+
+  likePost?(postId: number, userName: string): void;
 }

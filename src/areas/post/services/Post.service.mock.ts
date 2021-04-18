@@ -8,7 +8,7 @@ export class MockPostService implements IPostService {
     // 🚀 Implement this yourself.
     throw new Error("Method not implemented.");
   }
-  
+
   getAllPosts(username: string): IPost[] {
     // 🚀 Implement this yourself.
 
@@ -20,9 +20,8 @@ export class MockPostService implements IPostService {
     throw new Error("Method not implemented.");
   }
 
-  addCommentToPost(message: { id: string; createdAt: string; userId: string; message: string }, postId: string): void { 
+  addCommentToPost(message: { id: string; createdAt: string; userId: string; message: string }, postId: string): void {
     // 🚀 Implement this yourself.
-
 
     throw new Error("Method not implemented.");
   }
@@ -40,4 +39,6 @@ export class MockPostService implements IPostService {
       }
     }
   }
+
+  likePost(postId: number, userName: string): void {}
 }
