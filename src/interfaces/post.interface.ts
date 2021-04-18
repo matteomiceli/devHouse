@@ -6,9 +6,9 @@ interface IPost {
   userId: string;
   createdAt: Date;
   commentList?: Array<IComment>;
-  likes: number;
-  reposts: number;
-  comments: number;
+  likes: string; // likes, reposts, comments converted to type string to work with Octavio's code
+  reposts: string;
+  comments: string;
 }
 
 export default IPost;

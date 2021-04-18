@@ -37,18 +37,19 @@ class PostController implements IController {
 
   // 🚀 These post methods needs to be implemented by you
   private createComment = async (req: Request, res: Response, next: NextFunction) => {
-    const postID = req.params.id;
-    const commentText = req.body.commentText;
-    let comment = {
-      id: uuid.v4(),
-      createdAt: new Date(), 
-      userId: , 
-      message: commentText
-    }
+    // const postID = req.params.id;
+    // const commentText = req.body.commentText;
+    // let comment = {
+    //   id: `${uuid.v4()}`,
+    //   createdAt: `${new Date()}`, 
+    //   postId: `${postID}`, 
+    //   message: commentText
+    // }
 
-    await this.postService.addCommentToPost(comment, postID);
+    // await this.postService.addCommentToPost(comment, postID);
     res.render(`post/views/post`, { post } ); // sends back to previous page
   };
+
   private createPost = async (req: Request, res: Response, next: NextFunction) => {};
   private deletePost = async (req: Request, res: Response, next: NextFunction) => {
     const postID = req.params.id;

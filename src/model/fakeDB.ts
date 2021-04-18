@@ -1,4 +1,5 @@
 import IDatabase from "../interfaces/database.interface.ts";
+import IPost from "../interfaces/post.interface";
 
 // Please feel free to not use this, or completely change it to your liking. It is just an example.
 const database: IDatabase = {
@@ -112,11 +113,21 @@ const post = {
   commentList: [],
 };
 
-const posts = [
+const posts: IPost = [
   {
-    postId: 5,
+    postId: '1',
+    userId: "billgates",
+    createdAt: "Thursday, March 2nd",
+    message: "I'm seriously considering acquiring devHouse for 6 billion dollars...",
+    comments: "0",
+    reposts: "0",
+    likes: "0",
+    commentList: [],
+  },
+  {
+    postId: '5',
     userId: "john",
-    createdAt: new Date(),
+    createdAt: `${new Date()}`,
     message: "Hi there",
     comments: "4",
     reposts: "2",
@@ -124,9 +135,9 @@ const posts = [
     commentList: [],
   },
   {
-    postId: 4,
+    postId: '4',
     userId: "john",
-    createdAt: new Date(),
+    createdAt: `${new Date()}`,
     message: "this is a new post by me",
     comments: "4",
     reposts: "2",
