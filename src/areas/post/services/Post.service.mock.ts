@@ -17,8 +17,10 @@ export class MockPostService implements IPostService {
     // 🚀 Implement this yourself.
     throw new Error("Method not implemented.");
   }
-  addCommentToPost(message: { id: string; createdAt: string; userId: string; message: string }, postId: string): void {
+  addCommentToPost(message: { id: string; createdAt: Date; userId: string; message: string }, postId: string): void {
     // 🚀 Implement this yourself.
+
+
     throw new Error("Method not implemented.");
   }
 
