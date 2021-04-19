@@ -87,6 +87,7 @@ class PostController implements IController {
     }
 
     this.postService.addPost(post, sessionUser.username);
+    res.redirect(this.path);
   };
 
   private deletePost = async (req: Request, res: Response, next: NextFunction) => {

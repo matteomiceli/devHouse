@@ -12,10 +12,12 @@ export class MockPostService implements IPostService {
     database.users.forEach(user => {
       if (user.username == username) {
         existingUser = user;
-      } else {
-        throw Error ('You must be logged in to make a post');
       }
     })
+    if (existingUser == null) {
+      throw new Error('You must be logged in to make a post');
+      
+    }
 
     existingUser.posts.push(post);
   }
