@@ -1,12 +1,24 @@
 import IPost from "../../../interfaces/post.interface";
 import IPostService from "./IPostService";
 import { posts, database } from "../../../model/fakeDB";
+import { CommentViewModel } from "../comment.viewmodel";
+import IUser from "../../../interfaces/user.interface";
 
 // ⭐️ Feel free to change this class in any way you like. It is simply an example...
 export class MockPostService implements IPostService {
   addPost(post: IPost, username: string): void {
-    // 🚀 Implement this yourself.
-    throw new Error("Method not implemented.");
+    let existingUser: IUser;
+
+    database.users.forEach((user) => {
+      if (user.username == username) {
+        existingUser = user;
+      }
+    });
+    if (existingUser == null) {
+      throw new Error("You must be logged in to make a post");
+    }
+
+    existingUser.posts.push(post);
   }
 
   getAllPosts(username: string): IPost[] {
@@ -71,16 +83,18 @@ export class MockPostService implements IPostService {
     console.log("like post is being called ----------------------- post.service");
     database.users.forEach((user) => {
       for (let i = 0; i < user.posts.length; i++) {
-        if (user.posts[i].postId === postId.toString()) {
-          if (user.posts[i].likes[username]) {
-            delete user.posts[i].likes[username];
-            console.log("we disliked the post");
+        if (user.posts[i]) {
+          if (user.posts[i].postId === postId.toString()) {
+            if (user.posts[i].likes[username]) {
+              delete user.posts[i].likes[username];
+              console.log("we disliked the post");
+              console.log("Post Likes------" + JSON.stringify(user.posts[i].likes));
+              return;
+            }
+            user.posts[i].likes[username] = true;
+            console.log("we Liked the post");
             console.log("Post Likes------" + JSON.stringify(user.posts[i].likes));
-            return;
           }
-          user.posts[i].likes[username] = true;
-          console.log("we Liked the post");
-          console.log("Post Likes------" + JSON.stringify(user.posts[i].likes));
         }
       }
     });

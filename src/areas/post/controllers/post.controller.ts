@@ -4,6 +4,8 @@ import IPostService from "../services/IPostService";
 import { post, posts, database, userDatabase } from "../../../model/fakeDB";
 import { v4 as uuid } from "uuid";
 import IPost from "../../../interfaces/post.interface";
+import IComment from "../../../interfaces/comment.interface";
+import { session } from "passport";
 
 class PostController implements IController {
   postService: IPostService;
@@ -54,7 +56,7 @@ class PostController implements IController {
     const postID = req.params.id;
     const sessionUser = userDatabase[0]; // hardcoded session example
 
-    let comment = {
+    let comment: IComment = {
       id: `${uuid()}`,
       createdAt: new Date(),
       userId: `${sessionUser.id}`,
@@ -68,7 +70,25 @@ class PostController implements IController {
     res.render(`post/views/post`, { post: postObj }); // sends back to previous page
   };
 
-  private createPost = async (req: Request, res: Response, next: NextFunction) => {};
+  private createPost = async (req: Request, res: Response, next: NextFunction) => {
+    const postText = req.body.postText;
+    const sessionUser = userDatabase[0]; // hardcoded session example
+
+    let post: IPost = {
+      postId: `${uuid()}`,
+      message: postText,
+      userId: `${sessionUser.username}`,
+      createdAt: new Date(),
+      commentList: [],
+      likes: {},
+      reposts: 0,
+      comments: 0,
+    };
+
+    this.postService.addPost(post, sessionUser.username);
+    res.redirect(this.path);
+  };
+
   private deletePost = async (req: Request, res: Response, next: NextFunction) => {
     const postID = req.params.id;
     this.postService.deletePost(postID);
