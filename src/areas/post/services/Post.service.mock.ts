@@ -2,12 +2,22 @@ import IPost from "../../../interfaces/post.interface";
 import IPostService from "./IPostService";
 import { posts, database } from "../../../model/fakeDB";
 import { CommentViewModel } from "../comment.viewmodel";
+import IUser from "../../../interfaces/user.interface";
 
 // ⭐️ Feel free to change this class in any way you like. It is simply an example...
 export class MockPostService implements IPostService {
   addPost(post: IPost, username: string): void {
-    // 🚀 Implement this yourself.
-    throw new Error("Method not implemented.");
+    let existingUser: IUser;
+
+    database.users.forEach(user => {
+      if (user.username == username) {
+        existingUser = user;
+      } else {
+        throw Error ('You must be logged in to make a post');
+      }
+    })
+
+    existingUser.posts.push(post);
   }
 
   getAllPosts(username: string): IPost[] {
@@ -16,8 +26,8 @@ export class MockPostService implements IPostService {
     throw new Error("Method not implemented.");
   }
 
-  findById(id: string): IPost|undefined {
-    let returnedPost: IPost; 
+  findById(id: string): IPost | undefined {
+    let returnedPost: IPost;
     console.log('the id is ' + id);
     database.users.forEach(user => {
       user.posts.forEach(post => {
@@ -26,12 +36,12 @@ export class MockPostService implements IPostService {
           console.log(post);
           returnedPost = post;
         }
-      }) 
+      })
     });
     return returnedPost;
   }
 
-  addCommentToPost(message: { id: string; createdAt: Date; userId: string; message: string }, postId: string): void { 
+  addCommentToPost(message: { id: string; createdAt: Date; userId: string; message: string }, postId: string): void {
     const post = this.findById(postId);
     console.log(post)
     // push comment to post comment list
