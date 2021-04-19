@@ -78,7 +78,7 @@ class PostController implements IController {
     let post: IPost = {
       postId: `${uuid()}`,
       message: postText,
-      userId: `${sessionUser}`,
+      userId: `${sessionUser.username}`,
       createdAt: new Date(),
       commentList: [],
       likes: {},
