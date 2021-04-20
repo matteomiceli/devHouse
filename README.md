@@ -108,4 +108,9 @@
 
 - at some point I fiddled around with the interfaces and modded them to add the deletePost and likePost functions. Had an afterthought that extending them with a new interface may been better to adhere to the Open Closed Principle.
 
-- also wanted to clean up controller code by putting functions into their own files then porting them into the controller file.
+- also wanted to clean up controller code by putting functions into their own files then porting them into the controller file. 
+
+### Matteo
+- I struggled a lot with auth. I found a [github starter by Microsoft](https://github.com/microsoft/TypeScript-Node-Starter/blob/master/src/config/passport.ts), but realized all the code was written functionally. After weeks with 0 working code I scrapped auth. The included auth implemented is based off the solution you provided, however, I failed to fix all the bugs. 
+
+- Moving on to the posts section was a lot easier. I did some light modification of the interfaces to suit our needs, but for the most part, I kept the starter file interfaces. As reference, I looked at other labs, but didn't find I needed much help outside of that. I got comments and posts showing up, but wish I had more time to streamline it all. 
