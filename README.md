@@ -99,6 +99,13 @@
 
 ### Octavio
 
+- did a fair bit of research on passport in the beginning I read from multiple sources and tried to implement code from each of them. Trying to use this many sources on the same thing may have confused me. In the end I found myself stuck on where to implement "passport.use(local)". I read through
+
+  - [passport documentation](http://www.passportjs.org/docs/authenticate/),
+  - [Github typscript starter code](https://github.com/microsoft/TypeScript-Node-Starter/blob/master/src/config/passport.ts),
+  - [tsed.io](https://tsed.io/tutorials/passport.html#configure-your-server),
+  - and [Passport Hidden Manuel](https://github.com/jwalton/passport-api-docs#reqloginuser-callback) by jwalton.
+
 - at some point I fiddled around with the interfaces and modded them to add the deletePost and likePost functions. Had an afterthought that extending them with a new interface may been better to adhere to the Open Closed Principle.
 
 - also wanted to clean up controller code by putting functions into their own files then porting them into the controller file.
