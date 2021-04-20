@@ -114,3 +114,12 @@
 - I struggled a lot with auth. I found a [github starter by Microsoft](https://github.com/microsoft/TypeScript-Node-Starter/blob/master/src/config/passport.ts), but realized all the code was written functionally. After weeks with 0 working code I scrapped auth. The included auth implemented is based off the solution you provided, however, I failed to fix all the bugs. 
 
 - Moving on to the posts section was a lot easier. I did some light modification of the interfaces to suit our needs, but for the most part, I kept the starter file interfaces. As reference, I looked at other labs, but didn't find I needed much help outside of that. I got comments and posts showing up, but wish I had more time to streamline it all. 
+
+### Alex
+- Spent the majority of time focused on watching and following along with class videos; went through passport documentation as well as hidden passport documentation
+
+- I still can't wrap my head around authentication but slowly putting some of the pieces together. Ran into a lot of errors during this process. Used the hidden passport guide a lot in the beginning and then moved to random youTube videos and one section of a Udemy course I have after going through all class related videos multiple times
+
+- Cloned a few random repos from GitHub after just searching for "passport" and "passport-local" but could not really make much sense of it
+
+- I still can't wrap my head around authentication but slowly putting some of the pieces together. Ran into a lot of errors during this process. Used the hidden passport guide a lot in the beginning and then moved to random youTube videos and one section of a Udemy course I have after going through all class related videos multiple times; most resources outside of class videos did not end up being that helpful. Looking at random repos did help find patterns and understand what should go where to a certain extent
